@@ -9,7 +9,7 @@ class App extends Component {
 		super();
 		this.state = {
 			robots: robots,
-			searchfield: 'open',
+			searchfield: '',
 		}
 	}
 
@@ -19,12 +19,16 @@ class App extends Component {
 
 
 	render() {
+		const filteredRobots = this.state.robots.filter(
+				robots => {
+					return robots.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+				})
+
 		return (
 				<div className='tc'>
 					<h1> RoboFriends</h1>
 					<SearchBox searchChange={this.onSearchChange} />
-					<p>hi {this.state.searchfield}</p>
-					<CardList robots={robots} />
+					<CardList robots={filteredRobots} />
 				</div>
 			);		
 	}
